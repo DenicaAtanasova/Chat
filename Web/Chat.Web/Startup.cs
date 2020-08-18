@@ -1,21 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
-using Chat.Web.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Chat.Web.Hubs;
-
 namespace Chat.Web
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
+    using Chat.Web.Data;
+    using Chat.Web.Hubs;
+    using Chat.Web.Models.Chat;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -27,12 +24,19 @@ namespace Chat.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ChatDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<ChatUser>(
+                options =>
+                    {
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequiredLength = 6;
+                    }).AddEntityFrameworkStores<ChatDbContext>();
 
             services.AddSignalR();
 
@@ -44,6 +48,7 @@ namespace Chat.Web
         {
             if (env.IsDevelopment())
             {
+                
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
