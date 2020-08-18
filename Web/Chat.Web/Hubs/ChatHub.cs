@@ -12,7 +12,7 @@
                 "NewMessage",
                 new Message { 
                     User = this.Context.User.Identity.Name, 
-                    Text = message 
+                    Text = message, 
                 });
         }
     }
