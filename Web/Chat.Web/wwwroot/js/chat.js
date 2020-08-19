@@ -5,7 +5,7 @@
 
 connection.on("NewMessage",
     function (message) {
-        var chatInfo = `<div>[${message.user} ${escapeHtml(message.text)}]</div>`;
+        var chatInfo = `<div>[${message.user}] ${message.text}</div>`;
         $("#messages-list").append(chatInfo);
     });
 
@@ -20,12 +20,3 @@ connection.start()
     .catch(function (err) {
         return console.error(err.toString());
     });
-
-function escapeHtml(unsafe) {
-    return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}

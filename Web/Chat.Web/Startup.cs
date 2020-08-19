@@ -12,6 +12,7 @@ namespace Chat.Web
     using Chat.Web.Data;
     using Chat.Web.Hubs;
     using Chat.Web.Models.Chat;
+    using Ganss.XSS;
 
     public class Startup
     {
@@ -42,6 +43,9 @@ namespace Chat.Web
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            //services
+            services.AddTransient<IHtmlSanitizer>(_ => new HtmlSanitizer());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

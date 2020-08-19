@@ -1,18 +1,31 @@
 ﻿namespace Chat.Web.Hubs
 {
-    using Chat.Web.Models.Chat;
-    using Microsoft.AspNetCore.SignalR;
     using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.SignalR;
+
+    using Ganss.XSS;
+
+    using Chat.Web.Models.Chat;
 
     public class ChatHub : Hub
     {
+        private readonly IHtmlSanitizer _htmlSanitizer;
+
+        public ChatHub(IHtmlSanitizer htmlSanitizer)
+        {
+            this._htmlSanitizer = htmlSanitizer;
+        }
+
         public async Task Send(string message)
         {
+            var sanitizedMessage = _htmlSanitizer.Sanitize(message);
+
             await this.Clients.All.SendAsync(
                 "NewMessage",
                 new Message { 
                     User = this.Context.User.Identity.Name, 
-                    Text = message, 
+                    Text = sanitizedMessage, 
                 });
         }
     }
