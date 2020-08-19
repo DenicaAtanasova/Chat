@@ -14,4 +14,14 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Chat.Data.Models\Chat.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Chat.Data\Chat.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Models\Chat\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Chat.Web.Models.Chat
+﻿namespace Chat.Data.Models
 {
     public class Message
     {

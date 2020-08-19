@@ -1,6 +1,6 @@
-﻿namespace Chat.Web.Data
+﻿namespace Chat.Data
 {
-    using Chat.Web.Models.Chat;
+    using Chat.Data.Models;
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

@@ -5,8 +5,7 @@
     using Microsoft.AspNetCore.SignalR;
 
     using Ganss.XSS;
-
-    using Chat.Web.Models.Chat;
+    using Chat.Data.Models;
 
     public class ChatHub : Hub
     {

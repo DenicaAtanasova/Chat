@@ -9,10 +9,11 @@ namespace Chat.Web
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
-    using Chat.Web.Data;
     using Chat.Web.Hubs;
-    using Chat.Web.Models.Chat;
+    using Chat.Data.Models;
+
     using Ganss.XSS;
+    using Chat.Data;
 
     public class Startup
     {
